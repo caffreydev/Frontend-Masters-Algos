@@ -143,8 +143,28 @@ export default class DoublyLinkedList<T> {
     }
 
     removeAt(idx: number): T | undefined {
-        console.log(this.tail, 'tail')
+
+
+        // Handling edge cases and bad inputs
         if (this.length <= idx) return undefined;
+        if (idx === 0) {
+            const value = this.tail?.value;
+            this.tail = this.tail?.next;
+            if (this.tail) {
+                this.tail.prev = undefined;
+            }
+            this.length--;
+            return value;
+        }
+        if (idx === this.length -1) {
+            const value = this.head?.value;
+            this.head = this.head?.prev;
+            if (this.head) {
+                this.head.next = undefined;
+            }
+            this.length--;
+            return value;
+        }
 
         const firstHalf = idx < this.length/2 ? true : false;
         let counter = firstHalf ? 0 : this.length -1;
