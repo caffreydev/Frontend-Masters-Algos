@@ -27,13 +27,13 @@ export default class DoublyLinkedList<T> {
         else {
             const new_node : DLLNode<T> = {
                 value: item,
-                prev: this.tail,
+                prev: this.head,
                 next: undefined
             };
-            if (this.tail) {
-                this.tail.prev = new_node;
+            if (this.head) {
+                this.head.prev = new_node;
             }
-            this.tail = new_node;
+            this.head = new_node;
         }
         this.length++;
 }
@@ -41,7 +41,7 @@ export default class DoublyLinkedList<T> {
         if (this.length <= idx) return;
         const firstHalf = idx < this.length/2 ? true : false;
         let counter = firstHalf ? 0 : this.length -1;
-        let node = firstHalf ? this.tail : this.head;
+        let node = firstHalf ? this.head : this.tail;
         if (firstHalf) {
             while (counter++ < idx) {
                 if (!node) {
@@ -92,22 +92,22 @@ export default class DoublyLinkedList<T> {
             const new_node : DLLNode<T> = {
                 value: item,
                 prev: undefined,
-                next: this.head
+                next: this.tail
             };
-            if (this.head) {
+            if (this.tail) {
 
-                this.head.next = new_node;
+                this.tail.next = new_node;
             }
-            this.head = new_node;
+            this.tail = new_node;
         }
         this.length++;
 }
     remove(item: T): T | undefined {
-        if (length == 0) return undefined;
+        if (this.length == 0) return undefined;
         
         let node = this.tail;
         let counter = 0;
-        while (counter++ < length) {
+        while (counter++ < this.length) {
             if (!node) return undefined;
             if (node.value == item) {
                 if (node.prev) {
@@ -148,27 +148,27 @@ export default class DoublyLinkedList<T> {
         // Handling edge cases and bad inputs
         if (this.length <= idx) return undefined;
         if (idx === 0) {
-            const value = this.tail?.value;
-            this.tail = this.tail?.next;
-            if (this.tail) {
-                this.tail.prev = undefined;
+            const value = this.head?.value;
+            this.head = this.head?.next;
+            if (this.head) {
+                this.head.prev = undefined;
             }
             this.length--;
             return value;
         }
         if (idx === this.length -1) {
-            const value = this.head?.value;
-            this.head = this.head?.prev;
-            if (this.head) {
-                this.head.next = undefined;
+            const value = this.tail?.value;
+            this.tail = this.tail?.prev;
+            if (this.tail) {
+                this.tail.next = undefined;
             }
             this.length--;
             return value;
         }
-
+    
         const firstHalf = idx < this.length/2 ? true : false;
         let counter = firstHalf ? 0 : this.length -1;
-        let node = firstHalf ? this.tail : this.head;
+        let node = firstHalf ? this.head : this.tail;
         if (firstHalf) {
             while (counter++ < idx) {
                 if (!node) return;
