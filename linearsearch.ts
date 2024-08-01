@@ -1,7 +1,6 @@
-// We have array which we know is sorted
 const a = [1, 2, 3, 12, 100, 555, 999, 12000, 10**5];
 
-function linear_search(array: number[], value: number)
+function linear_search(array: number[], value: number): boolean
 {
     for (let i = 0; i < array.length; i++)
     {
