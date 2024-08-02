@@ -32,7 +32,7 @@ export default class Queue<T> {
             next: this.tail,
         }
         if (this.tail) {
-            this.tail.prev = newNode;
+            this.tail.next = newNode;
         }
         this.tail = newNode;
         this.length++;
@@ -45,8 +45,8 @@ export default class Queue<T> {
             this.length = 0;
             return value;
         }
-        this.head!.prev!.next == undefined;
-        this.head = this.head!.prev;
+        this.head!.next!.prev == undefined;
+        this.head = this.head!.next;
         this.length--;
         return value;
 }
