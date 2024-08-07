@@ -143,7 +143,6 @@ export default class DoublyLinkedList<T> {
             }
         }
         return undefined;
-
 }
     get(idx: number): T | undefined {
         if (this.length <= idx) return;
