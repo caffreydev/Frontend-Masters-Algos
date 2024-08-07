@@ -19,5 +19,13 @@ test("Trie", function() {
         "foo",
         "foolish",
     ]);
+
+    trie.insert("fool");
+
+    expect(trie.find("fo").sort()).toEqual([
+        "foo",
+        "fool",
+        "foolish",
+    ]);
 });
 
